@@ -34,7 +34,7 @@ def getDato(codigo):
             sensor = {'fecha':datos[1],'temperatura':datos[2],'frecuencia':datos[3],'caloria':datos[4],'oxigeno':datos[5],'distancia':datos[6]}
             return jsonify({'sensores':sensor})
         else:
-            return jsonify({'mensaje':"Curso no encontrado"})
+            return jsonify({'mensaje':"Dato no encontrado"})
     except Exception as ex:
         return jsonify({'mensaje':"Error"})
 
@@ -44,7 +44,7 @@ def setDato():
         #print(request.json)
         cursor = conexion.connection.cursor()
         sql = """INSERT INTO datosSensores(fecha, temperatura,frecuencia,caloria,oxigeno,distancia) 
-        VALUES ('{0}',{1},{2},{3},{4},{5})""".format(request.json['fecha'],request.json['temperatura'],request.json['frecuencia'],request.json['caloria'],request.json['oxigeno'],request.json['distancia'])
+        VALUES ('{0}',{1},{2},{3},{4},{5})""".format(request.form['fecha'],request.form['temperatura'],request.form['frecuencia'],request.form['caloria'],request.form['oxigeno'],request.form['distancia'])
         cursor.execute(sql)
         conexion.connection.commit() #esto confirma la acción de inserción
         return jsonify({'mensaje':"Dato registrado."})
