@@ -2,6 +2,7 @@
 from flask import Flask,jsonify,request
 from flask_mysqldb import MySQL
 from config import config
+from datetime import datetime
 
 app=Flask(__name__)
 
@@ -27,7 +28,7 @@ def getDatos():
 def getDato(codigo):
     try:
         cursor = conexion.connection.cursor()
-        sql = "SELECT * FROM datosSensores WHERE id ='{0}'".format(codigo)
+        sql = "SELECT * FROM datosSensores WHERE id ={0}".format(codigo)
         cursor.execute(sql)
         datos = cursor.fetchone()
         if datos != None:
@@ -44,7 +45,7 @@ def setDato():
         #print(request.json)
         cursor = conexion.connection.cursor()
         sql = """INSERT INTO datosSensores(fecha, temperatura,frecuencia,caloria,oxigeno,distancia) 
-        VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')""".format(request.form['fecha'],request.form['temperatura'],request.form['frecuencia'],request.form['caloria'],request.form['oxigeno'],request.form['distancia'])
+        VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')""".format(datetime.today().strftime('%Y-%m-%d %H:%M:%S'),request.form['temperatura'],request.form['frecuencia'],request.form['caloria'],request.form['oxigeno'],request.form['distancia'])
         cursor.execute(sql)
         conexion.connection.commit() 
         return jsonify({'mensaje':"Dato registrado."})
@@ -69,10 +70,10 @@ def actualizarDato(codigo):
         #print(request.json)
         cursor = conexion.connection.cursor()
         sql = """UPDATE datosSensores 
-        SET fecha = '{0}',temperatura = {1},
-        frecuencia = {2}, caloria = {3},
-        oxigeno = {4}, distancia = {5} 
-        WHERE id = {6}""".format(request.json['fecha'],request.json['temperatura'],request.json['frecuencia'],request.json['caloria'],request.json['oxigeno'],request.json['distancia'],codigo)
+        SET fecha = '{0}',temperatura = '{1}',
+        frecuencia = '{2}', caloria = '{3}',
+        oxigeno = '{4}', distancia = '{5}' 
+        WHERE id = '{6}'""".format(request.json['fecha'],request.json['temperatura'],request.json['frecuencia'],request.json['caloria'],request.json['oxigeno'],request.json['distancia'],codigo)
         cursor.execute(sql)
         conexion.connection.commit() 
         return jsonify({'mensaje':"Dato actualizado."})
