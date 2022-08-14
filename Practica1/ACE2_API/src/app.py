@@ -44,9 +44,9 @@ def setDato():
         #print(request.json)
         cursor = conexion.connection.cursor()
         sql = """INSERT INTO datosSensores(fecha, temperatura,frecuencia,caloria,oxigeno,distancia) 
-        VALUES ('{0}',{1},{2},{3},{4},{5})""".format(request.form['fecha'],request.form['temperatura'],request.form['frecuencia'],request.form['caloria'],request.form['oxigeno'],request.form['distancia'])
+        VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')""".format(request.form['fecha'],request.form['temperatura'],request.form['frecuencia'],request.form['caloria'],request.form['oxigeno'],request.form['distancia'])
         cursor.execute(sql)
-        conexion.connection.commit() #esto confirma la acción de inserción
+        conexion.connection.commit() 
         return jsonify({'mensaje':"Dato registrado."})
     except Exception as ex:
         return jsonify({'mensaje':"Error"})
@@ -58,7 +58,7 @@ def eliminarDato(codigo):
         cursor = conexion.connection.cursor()
         sql = "DELETe FROM datosSensores WHERE id= {0}".format(codigo)
         cursor.execute(sql)
-        conexion.connection.commit() #esto confirma la acción de inserción
+        conexion.connection.commit() 
         return jsonify({'mensaje':"Dato eliminado."})
     except Exception as ex:
         return jsonify({'mensaje':"Error"})
@@ -74,7 +74,7 @@ def actualizarDato(codigo):
         oxigeno = {4}, distancia = {5} 
         WHERE id = {6}""".format(request.json['fecha'],request.json['temperatura'],request.json['frecuencia'],request.json['caloria'],request.json['oxigeno'],request.json['distancia'],codigo)
         cursor.execute(sql)
-        conexion.connection.commit() #esto confirma la acción de update
+        conexion.connection.commit() 
         return jsonify({'mensaje':"Dato actualizado."})
     except Exception as ex:
         return jsonify({'mensaje':"Error"})
