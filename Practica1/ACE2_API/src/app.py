@@ -1,9 +1,13 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 from config import config
 from datetime import datetime
 
 app=Flask(__name__)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 conexion = MySQL(app)
 
