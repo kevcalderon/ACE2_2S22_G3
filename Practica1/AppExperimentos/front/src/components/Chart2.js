@@ -193,22 +193,12 @@ const Grafica3 = (datosExperimento) => {
   }, []);
 
   if(peticionDatosApi){
-    if(experimento ===1){
-      //return <p>hola</p>
-      //console.log("hola1");
-      //console.log(peticionDatosApi.sensores);
-      //console.log("hola1**");
+    if(experimento ===1){      
       return Grafica1(peticionDatosApi.sensores);
-      //return <h1>hola</h1>
     }else if(experimento ===2){
-      //return <p>hola2</p>
       return Grafica2(peticionDatosApi.sensores);
-      //eturn <Bar data={peticionDatosApi.sensores} />;
-      //return <h1>hola2</h1>
     }else if(experimento ===3){
-      //return <p>hola3</p>
       return Grafica3(peticionDatosApi.sensores);
-      //return <h1>hola3</h1>
     }
   }else return Grafica0();
   
