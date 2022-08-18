@@ -88,7 +88,7 @@ void draw(){
      println("Calorias: ", value[3]);
      println("Velocidad: ", value[1]);
      println("Distancia: ", value[2]);
-     
+     println(" ");
      if (x > ancho - 60) {
         x = 60;
         pT = true;
@@ -99,7 +99,7 @@ void draw(){
               
      }
      
-     text("CALORIAS QUEMADAS", 775, 150);
+     text("KCALORIAS QUEMADAS", 775, 150);
       fill(verde, 255);
       rect(800, 160, 60, 25);
       fill (0,0,255);
@@ -121,13 +121,14 @@ void draw(){
       endShape();
       strokeWeight(1);
      
-
+    
      PostRequest post = new PostRequest("http://127.0.0.1:3000/datos");
      post.addData("temperatura", str(value[0]));
-     post.addData("frecuencia", str(value[1]));
-     post.addData("caloria", str(value[3]));
-     post.addData("oxigeno", str(value[5]));
+     post.addData("velocidad", str(value[1]));
      post.addData("distancia", str(value[2]));
+     post.addData("calorias", str(value[3]));
+     post.addData("pulso", str(value[4]));
+     post.addData("oxigeno", str(value[5]));
      post.send();
      
      

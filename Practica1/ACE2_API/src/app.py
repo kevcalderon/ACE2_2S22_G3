@@ -43,8 +43,8 @@ def setDato():
     try:
         #print(request.json)
         cursor = conexion.connection.cursor()
-        sql = """INSERT INTO datosSensores(fecha, temperatura,frecuencia,caloria,oxigeno,distancia) 
-        VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')""".format(datetime.today().strftime('%Y-%m-%d %H:%M:%S'),request.form['temperatura'],request.form['frecuencia'],request.form['caloria'],request.form['oxigeno'],request.form['distancia'])
+        sql = """INSERT INTO datosSensores(fecha, temperatura,pulso,oxigeno,velocidad,distancia,calorias) 
+        VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')""".format(datetime.today().strftime('%Y-%m-%d %H:%M:%S'),request.form['temperatura'],request.form['pulso'],request.form['oxigeno'],request.form['velocidad'],request.form['distancia'],request.form['calorias'])
         cursor.execute(sql)
         conexion.connection.commit() 
         return jsonify({'mensaje':"Dato registrado.",'resultado':1})

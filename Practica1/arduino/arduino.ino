@@ -209,7 +209,8 @@ if(val<sens){
 
 
       // calorias 
-      float caloria = float(0.071*175*2.2*((millis()/60000)));
+      float caloria = float(0.071*175*((millis()/1000)/30));
+      caloria = caloria /100;
      String calorias= String(caloria);
       //Serial.println(calorias);
       // oxigeno y pulos
