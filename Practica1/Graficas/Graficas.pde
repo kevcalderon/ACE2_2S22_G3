@@ -13,10 +13,11 @@ Serial puertoArduino;
 Graf g = new Graf(ancho, alto, cFondo);
 ParticleSystem ps;
 String mensaje = null;
-
-
-
-
+color verde = color(16,243,0);
+color naranja = color(243,119,16);
+color blanco = color(255,255,255);
+color azul = color(26,37,210);
+color rojo = color(210,26,26);
 
 void setup(){
  myPort = new Serial(this, "COM5", 9600);
@@ -31,10 +32,6 @@ void setup(){
   g.cuadricula1();
   g.cuadricula2();  
 
-  
-  
-  //PARTICULAS
-  ps = new ParticleSystem(new PVector(850,250));
 }
 
 void draw(){
@@ -47,36 +44,51 @@ void draw(){
   }
     if (mensaje!=null){
       //println(mensaje);
-     int []value=int(split(mensaje,'/'));
-     println(value[0]);
+     float []value=float(split(mensaje,'/'));
+     //println(value[0]);
     
      fill(255,255,255);
      noStroke();
-     rectMode(CORNERS); 
+     rectMode(CORNER); 
      rect(140,20,200,45);//Borra lectura anterior 
      h = value[1];
   
   
-     //Grafica de temperatura corporal  
+     //Grafica SPO2  
      flagTemp = true;
+     
+     fill(verde, 255);
+     rect(460,50,60,25);
      fill (0,0,255);
-     text(h, 460, 68);
-     println("Temperatura Corporal :", value[0]);
-     g.puntosH(x, value[0], pH);
+     textSize(20);
+     text(value[0] + "°C",460,68);
+     textSize(12);
+     
+     //text(value[5], 460, 68);
+     println("SPO2 :", value[5]);
+     println("Pulso Cardiaco: ", value[4]);
+     if (value[5] != -999){
+           g.puntosH(x, value[5], pH);
+       }
+  
      pH = false;
      
      
-     //Grafica de Velocidad
+     //Grafica de Temperatura corporal
+     fill(verde, 255);
+     rect(460,290,135,25);
      fill (0,0,255);
-     //text(h, 140, 40);
-     println("Velocidad :", h);
-     g.puntosT(x, h, pH);
+     textSize(15);
+     text(value[5] + "%  | " + value[4] + "ppm",460,310);
+     textSize(12);
+     println("Temperatura corporal:", value[0]);
+     g.puntosT(x, value[0], pH);
  
-     
-     
      x = x + 5;
-    
-         
+     println("Calorias: ", value[3]);
+     println("Velocidad: ", value[1]);
+     println("Distancia: ", value[2]);
+     
      if (x > ancho - 60) {
         x = 60;
         pT = true;
@@ -87,13 +99,35 @@ void draw(){
               
      }
      
-     //value[0] = temperatura
-     //value[1] = velocidad
-     //value[2] = oxigeno
-     //value[3] = pulso
-     PostRequest post = new PostRequest("http://127.0.0.1:3000/compiler");
-     post.addData("temperatura", str(h));
-     //post.addDate("velocidad"
+     text("CALORIAS QUEMADAS", 775, 150);
+      fill(verde, 255);
+      rect(800, 160, 60, 25);
+      fill (0,0,255);
+      textSize(20);
+      text(value[3], 800, 180);
+      textSize(12);
+           
+      translate(width/1.2, height/2);
+      stroke(naranja);
+      strokeWeight(8);
+      fill(rojo);
+      beginShape();
+      for(float a = 0; a < TWO_PI; a += 0.01){
+         float r = 9;
+         float x = r * 16 * pow(sin(a), 3);
+         float y = -r * (13*cos(a) -5*cos(2*a) -2*cos(3*a) -cos(4*a));
+         vertex(x, y);
+      }
+      endShape();
+      strokeWeight(1);
+     
+
+     PostRequest post = new PostRequest("http://127.0.0.1:3000/datos");
+     post.addData("temperatura", str(value[0]));
+     post.addData("frecuencia", str(value[1]));
+     post.addData("caloria", str(value[3]));
+     post.addData("oxigeno", str(value[5]));
+     post.addData("distancia", str(value[2]));
      post.send();
      
      

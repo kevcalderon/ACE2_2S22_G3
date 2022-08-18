@@ -11,7 +11,7 @@ class Graf {
   }
   void cuadricula1(){// Temperatura corporal
     fill(0, 0, 0);
-    text("TEMPERATURA CORPORAL", (nX / 2) - 50, 70);
+    text("TEMPERATURA CORPORAL", (nX / 2) - 50, 75);
     stroke(150);   
     for (int  j = 60 ; j <= nX - 60; j = j + 20){
       line (j, 80, j, (nY / 2) - 20);      } // Vert
@@ -28,7 +28,7 @@ class Graf {
   
   void cuadricula2(){// Ritmo Cardiaco
     fill(0, 0, 0);
-    text("RITMO CARDIACO", (nX / 2) - 60, (nY / 2) + 10);
+    text("RITMO CARDIACO Y SPO2", (nX / 2) - 60, (nY / 2) + 10);
     stroke(150);   
     for (int  j = 60 ; j <= nX - 60; j = j + 20){
       line (j, (nY / 2) + 20 , j, nY - 80);} // Vert
