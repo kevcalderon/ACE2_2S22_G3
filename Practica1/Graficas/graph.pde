@@ -46,7 +46,7 @@ class Graf {
   void borra(){
     fill(colF); // Color del fondo
     noStroke();
-    rectMode(CORNERS);
+    rectMode(CORNER);
     rect(50 , 50, nX , nY - 30 ); 
   }
   
