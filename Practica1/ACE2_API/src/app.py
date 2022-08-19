@@ -20,7 +20,7 @@ def getDatos():
         datos = cursor.fetchall()
         sensores = []
         for fila in datos:
-            sensor = {'fecha':fila[1],'temperatura':fila[2],'frecuencia':fila[3],'caloria':fila[4],'oxigeno':fila[5],'distancia':fila[6]}
+            sensor = {'fecha':fila[1],'temperatura':fila[2],'pulso':fila[3],'oxigeno':fila[4],'velocidad':fila[5],'distancia':fila[6],'calorias':fila[7]}
             sensores.append(sensor)
 
         return jsonify({'sensores':sensores,'resultado':1})
@@ -35,7 +35,7 @@ def getDato(codigo):
         cursor.execute(sql)
         datos = cursor.fetchone()
         if datos != None:
-            sensor = {'fecha':datos[1],'temperatura':datos[2],'frecuencia':datos[3],'caloria':datos[4],'oxigeno':datos[5],'distancia':datos[6]}
+            sensor = {'fecha':datos[1],'temperatura':datos[2],'pulso':datos[3],'oxigeno':datos[4],'velocidad':datos[5],'distancia':datos[6],'calorias':datos[7]}
             return jsonify({'sensores':sensor, 'resultado':1})
         else:
             return jsonify({'resultado':-1, 'mensaje':"Dato no encontrado"})
@@ -74,9 +74,9 @@ def actualizarDato(codigo):
         cursor = conexion.connection.cursor()
         sql = """UPDATE datosSensores 
         SET fecha = '{0}',temperatura = '{1}',
-        frecuencia = '{2}', caloria = '{3}',
-        oxigeno = '{4}', distancia = '{5}' 
-        WHERE id = '{6}'""".format(request.json['fecha'],request.json['temperatura'],request.json['frecuencia'],request.json['caloria'],request.json['oxigeno'],request.json['distancia'],codigo)
+        pulso = '{2}', oxigeno = '{3}',
+        velocidad = '{4}', distancia = '{5}', calorias = '{6}' 
+        WHERE id = '{7}'""".format(request.form['fecha'],request.form['temperatura'],request.form['pulso'],request.form['oxigeno'],request.form['velocidad'],request.form['distancia'],request.form['calorias'],codigo)
         cursor.execute(sql)
         conexion.connection.commit() 
         return jsonify({'mensaje':"Dato actualizado.",'resultado':1})
