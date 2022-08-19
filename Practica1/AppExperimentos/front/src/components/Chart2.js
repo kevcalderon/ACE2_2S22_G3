@@ -4,7 +4,7 @@ import {Line, Bar, Scatter } from 'react-chartjs-2';
 import {Chart as ChartJS, LineElement} from 'chart.js/auto';
 import {datosGrafica0} from './Data'
 
-function Chart2({experimento}) {
+function Chart2(props) {
   
   const Grafica0 = () => {  
     const data = {
@@ -45,7 +45,8 @@ function Chart2({experimento}) {
 }
 
   const Grafica1 = (datosExperimento) => {  
-    console.log(datosExperimento);
+    //const datosRango = datosExperimento.filter(n => n.fecha > "2022-01-01" && n.fecha  > "2022-01-02");
+    //console.log(datosRango);
     if(datosExperimento){
       const data = {
         labels: datosExperimento.map((data) => data.fecha),
@@ -65,7 +66,7 @@ function Chart2({experimento}) {
         scales:{
             y: {
                 min:0,
-                max:50,
+                max:2,
                 stepSize: 1,              
             }
         },
@@ -106,7 +107,7 @@ const Grafica2 = (datosExperimento) => {
       scales:{
           y: {
               min:0,
-              max:20,
+              max:80,
               stepSize: 1,              
           }
       },
@@ -154,7 +155,7 @@ const Grafica3 = (datosExperimento) => {
       scales:{
           y: {
               min:0,
-              max:50,
+              max:200,
               stepSize: 1,              
           }
       },
@@ -184,7 +185,7 @@ const Grafica3 = (datosExperimento) => {
     //console.log(response.status);
     const responseJSON = await response.json();
     setPeticionDatosApi(responseJSON);
-    console.log(responseJSON);
+    //console.log(responseJSON);
     return responseJSON;
   }
 
@@ -192,13 +193,18 @@ const Grafica3 = (datosExperimento) => {
     fetchApi();
   }, []);
 
-  if(peticionDatosApi){
-    if(experimento ===1){      
-      return Grafica1(peticionDatosApi.sensores);
-    }else if(experimento ===2){
-      return Grafica2(peticionDatosApi.sensores);
-    }else if(experimento ===3){
-      return Grafica3(peticionDatosApi.sensores);
+  if(peticionDatosApi.sensores && props.fechaInicio && props.fechaFin){
+    console.log("props.fechaInicio " + props.fechaInicio);
+    console.log("props.fechaFin " + props.fechaFin);
+    const fecha2 = props.fechaFin + " 23:59:59"
+    const datosRango = peticionDatosApi.sensores.filter(n => new Date(n.fecha) > new Date(props.fechaInicio) && new Date(n.fecha) < new Date(fecha2));
+    console.log(datosRango);
+    if(props.experimento ===1){      
+      return Grafica1(datosRango);
+    }else if(props.experimento ===2){
+      return Grafica2(datosRango);
+    }else if(props.experimento ===3){
+      return Grafica3(datosRango);
     }
   }else return Grafica0();
   
