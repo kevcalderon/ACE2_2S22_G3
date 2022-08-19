@@ -65,7 +65,7 @@ function Chart2({experimento}) {
         scales:{
             y: {
                 min:0,
-                max:30,
+                max:50,
                 stepSize: 1,              
             }
         },
@@ -154,7 +154,7 @@ const Grafica3 = (datosExperimento) => {
       scales:{
           y: {
               min:0,
-              max:20,
+              max:50,
               stepSize: 1,              
           }
       },
