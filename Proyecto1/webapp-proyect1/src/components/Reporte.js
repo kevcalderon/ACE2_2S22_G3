@@ -11,11 +11,11 @@ function Reporte(props) {
     <>
     <br></br>
     <Button
-      variant="secondary" type="button" onClick={() => setVista(1)}>
+      variant="warning" type="button" onClick={() => setVista(1)}>
       Dashboard
     </Button>
     <Button
-      variant="secondary" type="button" onClick={() => setVista(2)}>
+      variant="warning" type="button" onClick={() => setVista(2)}>
       Gráficas
     </Button>
     <br></br>
