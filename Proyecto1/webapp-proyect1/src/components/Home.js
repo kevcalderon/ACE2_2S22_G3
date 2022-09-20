@@ -67,7 +67,7 @@ function Home(props) {
                 {vista === 1 ? (
                   <Entreno idUsuario={props.user.idUsuario}></Entreno>
                 ) : (
-                  <Reporte></Reporte>
+                  <Reporte idUsuario={props.user.idUsuario}></Reporte>
                 )}
               </div>
             </Col>
