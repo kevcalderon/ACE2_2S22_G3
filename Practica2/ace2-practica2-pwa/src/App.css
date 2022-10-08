@@ -36,3 +36,74 @@
     transform: rotate(360deg);
   }
 }
+
+.h1Titulo {
+  color:white;
+}
+
+.caja { 
+  background-color: rgb(27, 50, 75);
+  border-radius: 10px;  
+  margin: 2px;  
+}
+.ti {
+  padding: 2%;
+}
+.fechas {
+  padding: 2%;
+}
+
+.reporte {
+  text-align: center;
+  background-color: rgb(209, 214, 221);
+  border-radius: 10px;  
+}
+
+#fecha1, #fecha2 {
+  width: 120px;
+  height: 40px;
+  font-size: 28;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 20% 20% auto;    
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: rgb(122, 126, 131);
+  
+  border-radius: 10px;
+}
+
+.datoDashboard {
+  border-color: 2px solid rgb(255, 255, 255);
+  border-style: solid;
+  background-color: rgb(27, 50, 75);
+  color: white;
+  margin: 3%;
+  border-radius: 10px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.conPadding {
+  padding-left: 10px;
+  justify-content: center;
+}
+
+.cCenter {
+  justify-content: center;
+}
+
+.cantidad {
+  color:rgb(19, 255, 2);
+}
+
+.boton {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+

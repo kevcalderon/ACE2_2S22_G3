@@ -67,7 +67,11 @@ function Home(props) {
                 </Button>
               </ButtonGroup>
               <Fragment>
-                {vista === 1 ? <Entreno></Entreno> : <Reportes></Reportes>}
+                {vista === 1 ? (
+                  <Entreno idUsuario={props.user.idUsuario}></Entreno>
+                ) : (
+                  <Reportes idUsuario={props.user.idUsuario}></Reportes>
+                )}
               </Fragment>
             </Col>
           </Row>
