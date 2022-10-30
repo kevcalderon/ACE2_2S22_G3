@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Entreno } from "./Entreno";
-import { Reportes } from "./Reportes";
+import Reportes from "./Reportes";
 import App from "../App";
 
 function Home(props) {
